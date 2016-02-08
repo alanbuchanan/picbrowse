@@ -3,9 +3,8 @@ const app = express();
 
 import Search from 'bing.search';
 import util from 'util';
-import API_KEY from '../../config/config';
 
-const search = new Search(API_KEY);
+const search = new Search(process.env.API_KEY);
 
 search.web('lolcats funny',
 	{top: 2},
