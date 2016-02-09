@@ -1,10 +1,10 @@
+require('dotenv').config();
 import express from 'express';
 const app = express();
 import mongoose from 'mongoose';
 import SearchesController from './controllers/searches.controller';
 const SearchesMethods = new SearchesController();
 import path from 'path';
-require('dotenv').config();
 
 let mongoURI = process.env.DEV_URI;
 if (process.env.NODE_ENV === 'production') mongoURI = process.env.MONGOLAB_URI;
