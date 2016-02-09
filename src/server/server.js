@@ -1,12 +1,18 @@
 import express from 'express';
 const app = express();
 import mongoose from 'mongoose';
-import keys from './config/keys.config';
 import SearchesController from './controllers/searches.controller';
 const SearchesMethods = new SearchesController();
+import path from 'path';
+require('dotenv').config();
 
-const mongoURI = 'mongodb://127.0.0.1:27017/image-search';
-mongoose.connect(keys.MONGOLAB_URI || mongoURI, err => {if (err) console.log(err)});
+let mongoURI = process.env.DEV_URI;
+if (process.env.NODE_ENV === 'production') mongoURI = process.env.MONGOLAB_URI;
+
+mongoose.connect(mongoURI, err => {if (err) console.log(err)});
+
+// Serve static landing page
+app.use(express.static(path.join(__dirname, '../../views')));
 
 app.get('/', SearchesMethods.handleLanding);
 app.get('/api/imagesearch/:searchterm', SearchesMethods.handleQuery);

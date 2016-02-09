@@ -18,10 +18,6 @@ var _util = require('util');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _keys = require('../config/keys.config');
-
-var _keys2 = _interopRequireDefault(_keys);
-
 var _searches = require('../models/searches.model');
 
 var _searches2 = _interopRequireDefault(_searches);
@@ -40,7 +36,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var ImgSearch = _mongoose2.default.model('lookup', _searches2.default);
 
-var search = new _bing2.default(_keys2.default.API_KEY);
+var search = new _bing2.default(process.env.API_KEY);
 
 
 var objectFilterer = function objectFilterer(target, props) {
@@ -58,8 +54,7 @@ var _class = function () {
         key: 'handleLanding',
         value: function handleLanding(req, res) {
             // Landing page
-            // TODO: landing page
-            res.send('hello');
+            res.sendFile('../../views/index.html');
         }
     }, {
         key: 'handleQuery',
@@ -67,8 +62,8 @@ var _class = function () {
             var offset = 0;
 
             if (Object.keys(req.query).length !== 0) {
+
                 // Handle offset
-                console.log('query:', req.query);
                 if (req.query.hasOwnProperty('offset')) {
                     offset = req.query.offset;
                 }

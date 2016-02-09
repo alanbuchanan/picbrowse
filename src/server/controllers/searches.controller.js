@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 import Search from 'bing.search';
 import util from 'util';
-import keys from '../config/keys.config';
 import ImgSearchSchema from '../models/searches.model';
 const ImgSearch = mongoose.model('lookup', ImgSearchSchema);
 import moment from 'moment';
-const search = new Search(keys.API_KEY);
+const search = new Search(process.env.API_KEY);
 import _ from 'lodash';
 
 var objectFilterer = (target, props) => _.map(target, e => _.pick(e, props));
@@ -13,16 +12,15 @@ var objectFilterer = (target, props) => _.map(target, e => _.pick(e, props));
 export default class {
     handleLanding (req, res) {
         // Landing page
-        // TODO: landing page
-        res.send('hello')
+        res.sendFile('../../views/index.html')
     }
 
     handleQuery (req, res) {
         let offset = 0;
 
         if (Object.keys(req.query).length !== 0) {
+
             // Handle offset
-            console.log('query:', req.query)
             if(req.query.hasOwnProperty('offset')){
                 offset = req.query.offset;
             }
@@ -49,7 +47,6 @@ export default class {
                 res.send(objectFilterer(results, ['url', 'title', 'sourceUrl']));
             }
         });
-
     }
 
     getListOfPrevQueries (req, res) {

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/server/config/keys.config.js"],"names":[],"mappings":";;;;;kBAAe;AACd,UAAS,QAAQ,GAAR,CAAY,OAAZ;AACT,eAAc,IAAd","file":"keys.config.js","sourcesContent":["export default {\n\tAPI_KEY: process.env.API_KEY,\n\tMONGOLAB_URI: null\n}\n"]}
