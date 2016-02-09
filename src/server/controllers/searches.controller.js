@@ -7,7 +7,7 @@ import moment from 'moment';
 const search = new Search(process.env.API_KEY);
 import _ from 'lodash';
 
-var objectFilterer = (target, props) => _.map(target, e => _.pick(e, props));
+const objectFilterer = (target, props) => _.map(target, e => _.pick(e, props));
 
 export default class {
     handleLanding (req, res) {
